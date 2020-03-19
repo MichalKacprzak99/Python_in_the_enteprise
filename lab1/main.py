@@ -22,5 +22,5 @@ for i, col in enumerate(features):
     reg.fit(column,price)
     predicted_price = reg.predict(column)
     plt.plot(column, predicted_price, 'r')
-pd.DataFrame.hist(boston_df,['LSTAT','RM'])
+pd.DataFrame.hist(boston_df,['LSTAT', 'RM'])
 plt.show()
