@@ -10,7 +10,7 @@ boston_df = pd.DataFrame(boston_data['data'], columns=boston_data['feature_names
 boston_df['PRICE'] = boston_data['target']
 print(boston_df.head())
 plt.figure(num=1,figsize=(20, 5))
-features = ['LSTAT', 'RM']
+features = ['TAX', 'RM']
 reg = LinearRegression()
 price = np.array(boston_df['PRICE']).reshape(-1,1)
 for i, col in enumerate(features):
@@ -22,5 +22,5 @@ for i, col in enumerate(features):
     reg.fit(column,price)
     predicted_price = reg.predict(column)
     plt.plot(column, predicted_price, 'r')
-pd.DataFrame.hist(boston_df,['LSTAT', 'RM'])
+pd.DataFrame.hist(boston_df,['TAX', 'RM'])
 plt.show()
