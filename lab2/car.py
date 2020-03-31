@@ -65,7 +65,7 @@ class Enviroment:
     def handle_bad_input(self):
         bad_input_str = 'This is not proper input, try again'   
         return bad_input_str
-        
+
     def start(self):
         print(self)
         self.car.launch_engine()
@@ -77,15 +77,12 @@ class Enviroment:
                 event = self.available_events[event_number]
                 self.car.act(event)
                 self.car.print_parameters()
-            except ValueError:
+            except (ValueError,KeyError):
                 logging.info('This is not proper input, try again, Class: {} ; Method: '.format(self.__class__.__name__))
-                print(self.handle_bad_input)
-            except KeyError:
-                logging.info('This is not proper input, try again, Class: {} ; Method: '.format(self.__class__.__name__))
-                print(self.handle_bad_input)
+                print(self.handle_bad_input())
             except ValueTooLargeError:
                 logging.info('This is not proper input, try again, Class: {} ; Method: '.format(self.__class__.__name__))
-                print(self.handle_bad_input)
+                print(self.handle_bad_input())
 
 if __name__ == "__main__":
     enviroment = Enviroment(Car(10))
