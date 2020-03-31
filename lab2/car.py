@@ -9,7 +9,6 @@ logging.basicConfig(
      datefmt='%H:%M:%S'
  )
 class ValueTooLargeError(Exception):
-   """Raised when the input value is too large"""
    pass
 
 class Car:
@@ -65,7 +64,7 @@ class Enviroment:
     def handle_bad_input(self):
         bad_input_str = 'This is not proper input, try again'   
         return bad_input_str
-
+        
     def start(self):
         print(self)
         self.car.launch_engine()
