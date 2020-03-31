@@ -1,6 +1,4 @@
 import sys
-import math
-import random
 import logging
 from events import Accident, Faster, Slower, Left, Right, PitStop, CoronaVirus, EndSimulation
 
@@ -10,7 +8,9 @@ logging.basicConfig(
      format='[%(asctime)s] - %(message)s%(funcName)s',
      datefmt='%H:%M:%S'
  )
-
+class ValueTooLargeError(Exception):
+   """Raised when the input value is too large"""
+   pass
 
 class Car:
     def __init__(self, max_velocity):
@@ -28,7 +28,7 @@ class Car:
     def launch_engine(self):
         logging.info('Let\'s begin our journey, Class: {} ; Method: '.format(self.__class__.__name__))
         self.is_running = True
-        
+
     def auto_repair(self):
         t = 0
         dt = 0.5
@@ -40,8 +40,8 @@ class Car:
     def act(self, event):
         event().trigger(self)
         event().print_info()
-        
-        
+
+
 class Enviroment:
     def __init__(self, car):
         self.car = car
@@ -62,17 +62,31 @@ class Enviroment:
             option_str += "{} : {} \n".format(key,self.available_events[key].__name__)
         return option_str
 
+    def handle_bad_input(self):
+        bad_input_str = 'This is not proper input, try again'   
+        return bad_input_str
+        
     def start(self):
         print(self)
         self.car.launch_engine()
         while True:
-            event_number = int( input('Which event do you wanna test? ') )
-            event = self.available_events[event_number]
-            self.car.act(event)
-            self.car.print_parameters()
+            try:
+                event_number = int( input('Which event do you wanna test? ') )
+                if event_number >= 9:
+                    raise ValueTooLargeError
+                event = self.available_events[event_number]
+                self.car.act(event)
+                self.car.print_parameters()
+            except ValueError:
+                logging.info('This is not proper input, try again, Class: {} ; Method: '.format(self.__class__.__name__))
+                print(self.handle_bad_input)
+            except KeyError:
+                logging.info('This is not proper input, try again, Class: {} ; Method: '.format(self.__class__.__name__))
+                print(self.handle_bad_input)
+            except ValueTooLargeError:
+                logging.info('This is not proper input, try again, Class: {} ; Method: '.format(self.__class__.__name__))
+                print(self.handle_bad_input)
 
-
-if __name__ == "__main__": 
+if __name__ == "__main__":
     enviroment = Enviroment(Car(10))
     enviroment.start()
-    
