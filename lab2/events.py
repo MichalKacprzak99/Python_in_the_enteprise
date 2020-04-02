@@ -92,6 +92,6 @@ class CoronaVirus(Event):
 
 
 class EndSimulation(Event):
-    def trigger(self,car):
+     def trigger(self,car):
         logging.info('Thank you, Class: {} ; Method: '.format(self.__class__.__name__))
         sys.exit(0)

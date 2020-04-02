@@ -1,0 +1,14 @@
+Car a class - Minimum 5 methods//done
+ Events as class
+ - Min 3 different types of events (all inheriting from abstract class) //done
+ - abc (abstract class) // done
+  Enviroment as class as well, can be use to create events //done
+ Generator // ????????????
+  PEP8 // to check
+  For printing use Logger module and print the log of the program to a file. 
+ Make a lot of usecases 
+ (Reports: Just text files descibing what you learned during the classes) 
+ Environment -----(events)---> Agent(Car)
+
+
+ deadline 01.04.2020 23:59
